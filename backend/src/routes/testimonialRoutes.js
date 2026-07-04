@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { getTestimonials, getAllTestimonials, createTestimonial, approveTestimonial, deleteTestimonial, } from '../controllers/testimonialController.js';
+import { protect, adminOnly } from '../middleware/authMiddleware.js';
+const router = Router();
+router.get('/', getTestimonials);
+router.get('/all', protect, adminOnly, getAllTestimonials);
+router.post('/', protect, createTestimonial);
+router.put('/:id/approve', protect, adminOnly, approveTestimonial);
+router.delete('/:id', protect, adminOnly, deleteTestimonial);
+export default router;
